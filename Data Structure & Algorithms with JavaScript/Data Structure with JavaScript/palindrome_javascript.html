@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>palindrome for javascript</title>
+	<script>
+		function palin(word){
+			var rword = "";
+			for(var i = word.length; i > 0; i--){
+				rword += word.substring(i-1, i);
+			}
+			if( word == rword){
+				document.write('회문입니다.');
+			}else{
+				document.write('회문이 아닙니다.');
+			}
+		}
+		palin('racecar');
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

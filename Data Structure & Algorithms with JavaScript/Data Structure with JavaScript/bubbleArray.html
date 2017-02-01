@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bubble</title>
+	<script>
+		function bubble(){
+			var arr = [1,5,8,10,15,7,9,20,35,99];
+			var str = "";
+			for(var i = 0; i < arr.length; i++){
+				str += arr[i] + " ";
+			}
+			alert('정렬 전: ' + str);
+
+			//정렬
+			str = "";
+			for(var i = 0; i < arr.length; i++){
+				for(var j = 1; j < arr.length; j++){
+					if(arr[j-1] > arr[j]){
+						var tmp;
+						tmp = arr[j-1];
+						arr[j-1] = arr[j];
+						arr[j] = tmp;
+					}
+				}
+			}
+			for(var  i = 0; i < arr.length; i++){
+				str += arr[i] + " ";
+			}
+			alert('정렬 후: ' + str);
+		}
+		bubble();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

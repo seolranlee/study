@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lesson2</title>
+	<script type="text/javascript">
+		// Person()이라는 생성자 함수를 정의
+		var Person = function(living, age, gender){
+			this.living = living;
+			this.age = age;
+			this.gender = gender;
+			this.getGender = function(){return this.gender;};
+		};
+
+		// Person객체의 인스턴스를 만들고 copy라는 변수에 저장한다.
+
+		var cody = new Person(true, 33, 'male');
+
+		console.log(cody);
+		console.log(cody.getGender);	// 'male'이 안나오고 function (){ return this.gender; }이 나오는 이유는?
+
+		var myString = new String('foo');
+
+		console.log(myString);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

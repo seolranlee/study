@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>queue</title>
+	<script>
+		// Queue클래스 정의{s}
+		function Queue(){
+			this.dataStore = [];
+			this.enqueue = enqueue;
+			this.dequeue = dequeue;
+			this.front = front;
+			this.back = back;
+			this.toString = toString;
+			this.empty = empty;
+		}
+
+		function enqueue(element){
+			this.dataStore.push(element);
+		}
+
+		function dequeue(){
+			return this.dataStore.shift();
+		}
+
+		function front(){
+			return this.dataStore[0];
+		}
+
+		function back(){
+			return this.dataStore[this.dataStore.length - 1];
+		}
+
+		function toString(){
+			var retStr = '';
+			for(var i = 0; i < this.dataStore.length; i++){
+				retStr += this.dataStore[i] + '<br>';
+			}
+			return retStr;
+		}
+
+		function empty(){
+			if(this.dataStore.length == 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		// Queue클래스 정의{e}
+
+		// 테스트 프로그램
+		var q = new Queue();
+		q.enqueue('Meredith');
+		q.enqueue('Cynthia');
+		q.enqueue('Jennifer');
+		document.write(q.toString());
+		q.dequeue();
+		document.write(q.toString());
+		document.write('Front of queue: ' + q.front());
+		document.write('Back of queue: ' + q.back());
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

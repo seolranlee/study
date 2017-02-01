@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>stack</title>
+	<script>
+		function Stack(){
+			this.dataStore=[];
+			this.top=0;
+			this.push=push;
+			this.pop=pop;
+			this.peek=peek;
+			this.clear=clear;
+			this.length=length;
+		}
+
+		function push(element){
+			this.dataStore[this.top]=element;
+			this.top++;
+		}
+
+		function peek(){
+			return this.dataStore[this.top-1];
+		}
+
+		function pop(){
+			this.top--;
+			return this.dataStore[this.top];
+		}
+
+		function clear(){
+			this.top=0;
+		}
+
+		function length(){
+			return this.top;
+		}
+
+		var s = new Stack();
+		s.push('David');
+		s.push('Raymond');
+		s.push('Bryan');
+		document.write('length: ' + s.length());
+		document.write('<br>');
+		document.write(s.peek());
+		document.write('<br>');
+		var popped = s.pop();
+		document.write('The popped element is :' + popped)
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

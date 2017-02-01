@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lesson4</title>
+	<script type="text/javascript">
+
+		// Person은 생성자 함수이며, new 키워드와 함께 사용하도록 만들어졌다.
+
+		var Person = function(living, age, gender){
+			// 아래에서 'this'는 새롭게 작성된 객체(this = new Obejct();)를 뜻한다. 
+
+			this.living = living;
+			this.age = age;
+			this.gender = gender;
+			this.getGender = function(){return this.gender;};
+		}
+
+		// Person객체의 인스턴스를 만들어 cody에 저장한다.
+		// var cody = Person(true, 33, 'male');
+
+		// new키워드와 함께 생성자 함수를 호출하면, undefined대신 'this'가 반환된다.
+		// cody는 Person()의 객체이자 인스턴스이다.
+		var cody = new Person(true, 33, 'male');
+
+		console.log(cody);
+		console.log(typeof cody);	// object
+		console.log(cody.constructor);	// Person()함수가 기록된다.
+
+
+		var codyOrgin = new Object();
+		codyOrgin.living = true;
+		codyOrgin.age = 33;
+		codyOrgin.gender = 'male';
+		codyOrgin.getGender = function(){return this.gender};
+
+
+		// var codyOrgin = {
+		// 	living : true,
+		// 	age : 33,
+		// 	gender : 'male',
+		// 	getGender : function(){return this.gender;},
+		// }
+
+		console.log(codyOrgin);
+		console.log(typeof codyOrgin);
+		console.log(codyOrgin.constructor);	// function Object() { [native code] }
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

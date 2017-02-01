@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>factorial(stack)</title>
+	<script>
+
+		// 스택클래스 구현{s}
+		function Stack(){
+			this.dataStore=[];
+			this.top=0;
+			this.push=push;
+			this.pop=pop;
+			this.peek=peek;
+			this.clear=clear;
+			this.length=length;
+		}
+
+		function push(element){
+			this.dataStore[this.top]=element;
+			this.top++;
+		}
+
+		function peek(){
+			return this.dataStore[this.top-1];
+		}
+
+		function pop(){
+			this.top--;
+			return this.dataStore[this.top];
+		}
+
+		function clear(){
+			this.top=0;
+		}
+
+		function length(){
+			return this.top;
+		}
+		// 스택클래스 구현{e}
+
+
+		function fact(n){
+			var s = new Stack();
+			while(n > 1){
+				s.push(n--);
+			}
+			var product = 1;
+			while(s.length() > 0){
+				product *= s.pop();
+			}
+			return product;
+		}
+
+		document.write(fact(5));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
