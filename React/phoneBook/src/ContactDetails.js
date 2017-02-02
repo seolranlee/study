@@ -13,6 +13,7 @@ import React, { Component } from 'react';
  		this.handleToggle = this.handleToggle.bind(this);
  		this.handleChange = this.handleChange.bind(this);
  		this.handleEdit = this.handleEdit.bind(this);
+ 		this.handleKeyPress = this.handleKeyPress.bind(this);
  	}
 
  	handleToggle(){
@@ -39,6 +40,13 @@ import React, { Component } from 'react';
 
  	handleEdit(){
  		this.props.onEdit(this.state.name, this.state.phone);
+ 	}
+
+ 	handleKeyPress(e) {
+ 		if(e.charCode == 13){	// 13은 enter란 뜻
+ 			this.handleToggle();
+ 		}
+
  	}
 
  	render(){
@@ -68,6 +76,7 @@ import React, { Component } from 'react';
 						placeholder="phone"
 						value={this.state.phone}
 						onChange={this.handleChange}
+						onKeyPress={this.handleKeyPress}
 					/>
 				</p>
  			</div>
@@ -75,7 +84,7 @@ import React, { Component } from 'react';
 
  		const view = this.state.isEdit ? edit : details;
 
- 		const blank = (<div>Not Selecdted</div>);
+ 		const blank = (<div>Not Selected</div>);
 
  		return(
  			<div>
