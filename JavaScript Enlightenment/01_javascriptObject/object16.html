@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// 원시값을 사용한다.
+
+		var myNull = null;
+		var myUndefined = undefined;
+		var primitiveString1 = 'foo';
+		var primitiveString2 = String('foo');	// new를 사용하지 않았으므로 원시값을 얻게 된다.
+		var primitiveNumber1 = 10;
+		var primitiveNumber2 = Number(10);	// new를 사용하지 않았으므로 원시값을 얻게 된다.
+		var primitiveBoolean1 = true;
+		var primitiveBoolean2 = Boolean(true);	// new를 사용하지 않았으므로 원시값을 얻게 된다.
+
+		/*
+		원시값을 객체처럼 다루면 값이 객체로 변환된다는 것을 보여주기 위해 toString() 속성 메소드에 접근했다.(Obejct.prototype에서 상속받은 매소드)
+		*/
+
+		console.log(primitiveString1.toString(), primitiveString2.toString());	// foo foo가 기록된다.
+
+		console.log(primitiveNumber1.toString(), primitiveNumber2.toString());	// 10 10이 기록된다.
+
+		console.log(primitiveBoolean1.toString(), primitiveBoolean2.toString());	// true true가 기록된다.
+
+		/*
+		null과 undefined는 객체로 변환되지 않으며 생성자도 없다. 따라서 다음 코드에서는 에러가 발생할 것이다.
+		*/
+
+		// console.log(myNull.toString());	//  Cannot read property 'toString' of null
+		// console.log(myUndefined.toString());	// Cannot read property 'toString' of undefined
+
+		console.log(typeof myNull);	// 근데, 이게 object인 이유는?
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

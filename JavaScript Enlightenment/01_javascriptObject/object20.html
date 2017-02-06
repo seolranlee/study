@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var objA = {property:'value'};
+		var pointer1 = objA;
+		var pointer2 = pointer1;
+
+		// objA.propert를 갱신하면, 참조(pointer1, pointer2)도 모두 갱신된다.
+		objA.property = null;
+
+		// objA, pointer1, pointer2 모두 같은 객체를 가리키므로, 'null null null'이 기록된다.
+		console.log(objA.property, pointer1.property, pointer2.property);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

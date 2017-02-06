@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+	var objectFoo = { same : 'same' };
+	var objectBar = { same : 'same' };
+
+	// false가 기록된다. 자바스크립트에서 두 객체가 동등한지 같은 자료형인지는 중요햐지 않다. 
+	console.log(objectFoo === objectBar);	// false
+
+	// 두 복합객체가 같은지 확인한다.
+	var objectA = { foo:'bar' };
+	var objectB = objectA;
+
+	console.log(objectA === objectB);	// true. 두 변수가 모두 같은 객체를 참조하고 있으므로.
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

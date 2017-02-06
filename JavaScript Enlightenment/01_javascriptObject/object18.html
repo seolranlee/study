@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var myObject = {};
+
+		var copyOfMyObject = myObject;	// 값이 아닌 '참조'만 복사한다.
+
+		myObject.foo = 'bar';	// myObject에 저장된 값을 수정한다.
+
+		/*
+		이제 myObject와 copyOfMyObject를 출력해보면 두 변수 모두 foo속성을 가지고 있다는 것을 알 수 있다. 이는 두 변수가 같은 객체를 참조했기 때문이다.
+		*/
+
+		console.log(myObject, copyOfMyObject);	// Object {foo: "bar"}, Object {foo: "bar"}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
