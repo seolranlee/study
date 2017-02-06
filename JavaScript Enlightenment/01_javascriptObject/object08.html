@@ -2,22 +2,24 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>lesson6</title>
+	<title>javascriptObject</title>
 	<script type="text/javascript">
 
 		var Person = function(living, age, gender){
-
 			this.living = living;
 			this.age = age;
 			this.gender = gender;
-			this.getGender = function(){ return this.gender; };
+			this.getGender = function(){return this.gender};
 		};
 
 		var cody = new Person(true, 33, 'male');
-		console.log(cody);
+		console.log(cody);	// Person {living: true, age: 33, gender: "male"}
 
-		var lisa = new Person(true, 34, 'female');
-		console.log(lisa);
+
+		var seolran = new Person(true, 28, 'female');
+		console.log(seolran);		//Person {living: true, age: 28, gender: "female"}
+
+
 
 	</script>
 </head>

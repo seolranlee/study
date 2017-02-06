@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// new 키워드를 사용한 각 네이티브 생성자의 인스턴스 생성
+
+		var myNumber = new Number(23);
+		var myString = new String('foo');
+		var myBoolean = new Boolean(false);
+		var myObject = new Object();
+		var myArray = new Array('foo', 'bar');
+		var myFunction = new Function('x', 'y', 'return x*y');
+		var myDate = new Date();
+		var myRegExp = new RegExp('\bt[a-z]+\b');
+		var myError = new Error('Crab!');
+
+		// 만들어진 객체의 생성자가 무엇인지 기록 및 확인
+
+		console.log(myNumber.constructor);
+		console.log(myString.constructor);
+		console.log(myBoolean.constructor);
+		console.log(myObject.constructor);
+		console.log(myArray.constructor);
+		console.log(myFunction.constructor);
+		console.log(myDate.constructor);
+		console.log(myRegExp.constructor);
+		console.log(myError.constructor);
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

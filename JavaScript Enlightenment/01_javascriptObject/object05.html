@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// Object() 생성자를 사용해 codyA 객체를 생성한다.
+
+		var codyA = new Object();
+
+		codyA.living = true;
+		codyA.age = 33;
+		codyA.gender = 'male';
+		codyA.getGender = function(){ return codyA.gender };
+
+		console.log(codyA);
+
+		// Object {living=true, age=33, gedner="male", ...} 객체가 기록된다.
+
+
+		/* 아래에서도  동일한 cody 객체가 만들어지지만, 네이티브 Obejct() 생성자가 아닌 우리가 정의한 Person() 생성자와 new 연산자를 사용해 인스턴스로 만들었다. */
+
+		var Person = function(living, age, gender){
+			this.living = living;
+			this.age = age;
+			this.gender = gender;
+			this.getGender = function(){return this.gender}
+		};
+
+		var codyB = new Person(true, 33, 'male');
+
+		console.log(codyB);
+		// Person {living=true, age=33, gedner="male", ...} 객체가 기록된다.
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
