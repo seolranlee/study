@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// cody Object() 객체를 만든다.
+		var cody = new Object();
+
+		// 속성을 설정한다.
+		cody.living = true;
+		cody.age = 33;
+		cody.gender = 'male';
+		cody.getGender = function(){return cody.gender};
+
+		// 속성의 값을 가져온다.
+		console.log(
+
+			cody.living,
+			cody.age,
+			cody.gender,
+			cody.getGender
+
+		);
+
+		// true 33 "male" function (){return cody.gender} 이 기록된다.
+
+		// 속성을 갱신다. 문법은 설정할 때와 똑같다.
+		cody.living = false;
+		cody.age = 99;
+		cody.gender = 'female';
+		cody.getGender = function(){return 'Gender = ' + cody.gender};
+
+		console.log(cody);
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

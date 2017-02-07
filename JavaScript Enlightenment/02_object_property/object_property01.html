@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var myObject= {};
+
+		// 네이티브 자바스크립트의 자료형 대부분을 myObject의 내부에 속성으로 포함한다.
+
+		myObject.myFunction = function(){};
+		myObject.myArray = [];
+		myObject.myString = 'string';
+		myObject.myNumber = 33;
+		myObject.myDate = new Date();
+		myObject.myRegExp = /a/;
+		myObject.myNull = null;
+		myObject.myUndefined = undefined;
+		myObject.myObject = {};
+		myObject.myMath_PI = Math.PI;
+		myObject.myError = new Error('Crap!');
+
+		console.log(
+			myObject.myFunction, myObject.myArray, myObject.myString, myObject.myNumber, myObject.myDate, myObject.myRegExp, myObject.myNull, myObject.myUndefined, myObject.myObject, myObject.myMath_PI, myObject.myError
+		);
+
+		// 다른 복합 객체(예: 함수)도 이와 똑같이 동작한다.
+
+		var myFunction = function(){};
+
+		myFunction.myFunction = function(){};
+		myFunction.myArray = [];
+		myFunction.myString = 'string';
+		myFunction.myNumber = 33;
+		myFunction.myDate = new Date();
+		myFunction.myRegExp = /a/;
+		myFunction.myNull = null;
+		myFunction.myUndefined = undefined;
+		myFunction.myMath_PI = Math.PI;
+		myFunction.myError = new Error('Crap!');
+
+		console.log(
+			myFunction.myFunction, myFunction.myArray, myFunction.myString, myFunction.myNumber, myFunction.myDate, myFunction.myRegExp, myFunction.myNull, myFunction.myUndefined, myFunction.myObject, myFunction.myMath_PI, myFunction.myError
+		);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
