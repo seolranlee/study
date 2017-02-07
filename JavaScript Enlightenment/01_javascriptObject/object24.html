@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var myNumber = new  Number(23);
+		var myNumberL = 23;
+		var myString = new String('male');
+		var myStringL = 'male';
+		var myBoolean = new Boolean(true);
+		var myBooleanL = true;
+
+
+		var myObject = new Object();
+		var myObjectL = {};
+		var myArray = new Array();
+		var myArrayL = [];
+		var myFunction = new Function();
+		var myFunctionL = function(){};
+		var myDate = new Date();
+		var myRegExp = new RegExp('/./');
+		var myRegExpL = /./;
+		var myError = new Error();
+
+		console.log(
+			myNumber.constructor,
+			myNumberL.constructor,
+			typeof myNumber,
+			typeof myNumberL,
+
+			myString.constructor,
+			myStringL.constructor,
+			typeof myString,
+			typeof myStringL,
+
+			myObject.constructor,
+			myObjectL.constructor,
+			typeof myObject,
+			typeof myObjectL,
+
+			myArray.constructor,
+			myArrayL.constructor,
+			typeof myArray,
+			typeof myArrayL,
+
+			myFunction.constructor,
+			myFunctionL.constructor,
+			typeof myFunction,
+			typeof myFunctionL,
+
+			myDate.constructor,
+			typeof myDate,
+
+			myRegExp.constructor,
+			myRegExpL.constructor,
+			typeof myRegExp,
+			typeof myRegExpL,
+
+			myError.constructor,
+			typeof myError
+		)
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

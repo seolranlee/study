@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// 네이티브 객체를 수정하는 것은 권장하는 방법은 아니다.
+
+		// agumentedProperties 속성을 추가해 내장 String 생성자 함수를 확장한다.
+		String.agumentedProperties = [];
+
+		if(!String.prototype.trimIT){	// prototype 객체에 trimIT() 함수가 없으면 추가한다.
+			String.prototype.trimIT = function(){
+				return this.replace(/^\s+|\s+$/g,'');
+			}
+			// 이제 agumentedProperties 배열에 trimIT 문자열을 추가한다.
+			String.agumentedProperties.push('trimIT');
+		}
+
+		var myString = 'trim me';
+		// 새로 만든 trimIT 문자열 메소드를 실행해본다. 'trim me'가 기록된다.
+		console.log(myString.trimIT());
+
+		console.log(String.agumentedProperties.join());	// 'trimIT'가 기록된다.
+
+		// The join() method joins the elements of an array into a string, and returns the string.
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

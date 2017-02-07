@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// 실제로 객체를 만드는 네이티브 생성자라면 동일하게 적용할 수 있다.
+		var myString = new String();
+		var myNumber = new Number();
+		var myBoolean = new Boolean(true);
+
+		var myObject = new Object();
+		var myArray = new Array();
+		var myFunction = new Function('return 2+2');
+		var myRegExp = new RegExp('\bt[a-z]+\b');
+
+		myString.prop = 'test';
+		myNumber.prop = 'test';
+		myBoolean.prop = 'test';
+
+		myObject.prop = 'test';
+		myArray.prop = 'test';
+		myFunction.prop = 'test';
+		myRegExp.prop = 'test';
+
+		console.log(myString.prop, myNumber.prop, myBoolean.prop, myObject.prop, myArray.prop, myFunction.prop, myRegExp.prop);
+
+		// test test test test test test test가 기록된다.
+
+
+		// 주의! 원시/리터럴 값에는 인스턴스 속성을 설정할 수 없다.
+		var myString = 'string';
+		var myNumber = 1;
+		var myBoolean = true;
+
+		myString.prop = true;
+		myNumber.prop = true;
+		myBoolean.prop = true;
+
+		// undefined undefined undefined
+		console.log(myString.prop,myNumber.prop,myBoolean.prop);
+
+
+		var myObject = {};
+		var myArray = [];
+		var myFunction = function(){};
+		var myRegExp = /./;
+
+
+		myObject.prop = 'literal';
+		myArray.prop = 'literal';
+		myFunction.prop = 'literal';
+		myRegExp.prop = 'literal';
+
+
+		// literal literal literal literal 
+		console.log(myObject.prop, myArray.prop, myFunction.prop, myRegExp.prop)
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var CustomConstructor = function CustomConstructor(){return 'hello world!'};
+		var instanceOfCustomObject = new CustomConstructor();	// 인스턴스 생성
+
+
+		// true
+		console.log(instanceOfCustomObject.constructor === CustomConstructor);
+
+
+		// CustomConstructor() 함수에 대한 참조가 반환된다.
+		// function CustomConstructor(){return 'hello world!'} 가 반환된다.
+		console.log(instanceOfCustomObject.constructor);
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

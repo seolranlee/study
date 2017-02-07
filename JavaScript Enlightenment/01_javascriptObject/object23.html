@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var foo = {};	// 인스턴스 생성
+		var foo2 = new Object();		// 인스턴스 생성
+
+		console.log(foo.constructor === Object);	// true
+		console.log(foo2.constructor === Object);	// true
+
+		console.log(foo.constructor);	// function Object() { [native code] }
+		console.log(foo2.constructor);	// function Object() { [native code] }
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

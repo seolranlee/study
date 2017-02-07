@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// 사용자 정의 객체 생성자                                                                                                                                                                                                                                        
+		var CustomConstructor = function(){this.foo = 'bar'};
+
+		// CustomConstructor의 인스턴스 생성
+		var instanceOfCustomConstructor = new CustomConstructor();
+
+		// true
+		console.log(instanceOfCustomConstructor instanceof CustomConstructor);
+		console.log(instanceOfCustomConstructor instanceof Object);
+
+
+		console.log(instanceOfCustomConstructor.foo);
+
+		// 네이티브 객체에서도 똑같이 사용한다.
+		console.log(new Array('foo') instanceof Array);	// true
+		console.log('foo' instanceof Array);	// false
+		console.log(new Array('foo') instanceof Object);	// true
+
+		// 자바스크립트의 모든 객체는 Object() 생성자를 상속하므로 어떤 객체가 Obejct()의 인스턴스인지 물으면 항상 true를 반환한다.
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
