@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		Object.prototype.foo = 'foo';
+
+		var myString = 'bar';
+
+		var myString2 = new String('bar2');
+
+
+		console.log(myString.toString());
+		console.log(myString.constructor);
+		console.log(myString.foo);
+
+		// 객체'처럼'사용해서 myString이 순간 객체화 됐다가 다시 원시값으로 돌아간건가?
+
+
+		// Object.prototype에 추가한 것은 for in 루프와 프로토타입 체인에서 볼 수 있으니 주의가 필요하다.
+
+
+		console.log(myString2);
+
+		for(key in myString2){
+			console.log(key);		// foo도 있다.
+		}
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

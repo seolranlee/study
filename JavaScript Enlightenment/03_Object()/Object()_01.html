@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var cody = new Object();		// 속성이 없는 빈 객체를 만든다.
+
+		for(key in cody){
+			if(cody.hasOwnProperty(key)){
+				console.log(key);
+				// cody 자체에는 속성이 없기 때문에 아무런 로그도 보이지 않는다.
+			}
+		}
+
+		console.log(new Array())
+
+		console.log(new Object())
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
