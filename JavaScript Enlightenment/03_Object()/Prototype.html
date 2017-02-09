@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>prototype</title>
+	<script type="text/javascript">
+		var foo = {
+
+			name : 'foo',
+		}
+
+		Object.prototype.a = 'hello world';
+		// foo.prototype.a = 'hello world';
+		console.log(foo);
+		console.log(foo.a);
+
+
+		var myArray = new Array();
+		Array.prototype.a = 'foo'
+
+		console.log(myArray)
+		console.log(myArray.a)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
