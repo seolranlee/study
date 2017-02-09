@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// myArray는 Arrya(배열) 객체다.
+		var myArray = ['foo', 'bar'];
+
+		console.log(myArray.join());		// foo,bar
+		// join()은 사실 Array.prototype.join으로 정의되어 있다.
+		console.log(myArray.__proto__.join());		// 나오지 않는 이유는?
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

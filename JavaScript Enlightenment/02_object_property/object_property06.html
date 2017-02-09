@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var foobarObejct = {
+			foobar: 'foobar 는 의미없는 코드를 표현할 때 사용합니다.'
+		}
+
+		var string1 = 'foo';
+		var string2 = 'bar';
+
+		console.log(foobarObejct[string1+string2]);		// foobar 는 의미없는 코드를 표현할 때 사용합니다.
+
+		// 점 표기법으로는 가능할까?
+
+		var myObject = {
+			'123' : 'zero',
+			'class' : 'foo',
+			'name' : 'seolran'
+		};
+
+		// 점 표기법으로는 가능할까? 자바스크립트에서 'class'는 예약어라는 사실을 기억하자.
+
+		console.log(myObject['123'], myObject['class'], myObject['name']);	// zero foo
+
+		// 다음은 각괄호 표기법에선 가능하지만 점 표기법으로는 불가능하다. 에러가 발생할 것이다.
+		// console.log(myObject.123, myObject.class);
+		console.log(myObject.name)
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

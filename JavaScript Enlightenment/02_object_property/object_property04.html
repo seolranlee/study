@@ -33,6 +33,26 @@
 		cody.getGender = function(){return 'Gender = ' + cody.gender};
 
 		console.log(cody);
+
+
+		var Person = function(option){
+
+			this.living = option.living;
+			this.name = option.name;
+			this.age = option.age;
+		}
+
+		var  option = {
+			living : true,
+			name : 'seolran',
+			age : 28,
+		}
+
+
+		var Seolran = new Person(option);
+
+		console.log(Seolran);
+		
 		
 	</script>
 </head>
