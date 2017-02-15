@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		// 함수는 변수(funcA), 배열(funcB), 객체(funcC)에 저장될 수 있다.
+		var funcA = function(){};		// funcA()로 호출한다.
+		var funcB = [function(){}];	// funcB[0]()로 호출한다.
+		var funcC = {method: function(){}};	// funcC.method() 도는 funcC['method']로 호출한다.
+
+		// 함수는 함수로 전달할 수도, 함수에서 반환될 수도 있다.
+		var funcD = function(func){
+			return func
+		};
+
+		var runFuncPassedToFuncD = function(){console.log('Hi')}
+
+		console.log(runFuncPassedToFuncD);		// function (){console.log('Hi')}으로 찍힌다. (함수)
+
+		runFuncPassedToFuncD();		// Hi
+
+
+		// 함수는 객체다. 즉 속성을 가진다.
+		var funcE = function(){};
+		funcE.answer = 'yup';	// 인스턴스 속성
+		console.log(funcE.answer);	// yup
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

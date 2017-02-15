@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">
+
+		var addNumberA = new Function('num1', 'num2', 'return num1 + num2');
+
+		console.log(addNumberA(3, 29));	// 32가 기록된다.
+
+		// 리터럴 방식으로도 작성할 수 있다. 이 방식이 더 많이 사용된다.
+		var addNumberB = function(num1, num2){ return num1 + num2 };
+
+		console.log(addNumberB(2, 21));	// 23이 기록된다.
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

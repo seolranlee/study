@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptObject</title>
+	<script type="text/javascript">	
+
+		var addFunction = new  Function('num1', 'num2', 'return num1 + num2');
+
+		/*
+		위 방식 대신 쉼표로 인수를 구분하면 Function()의 첫 번째 매개변수에서 인수를 한꺼번에 정의할 수 있다.
+		이 때는 두번째 매개변수로 함수 몸체를 전달한다. 
+		*/
+		var timesFunction = new Function('num1, num2', 'return num1 * num2');
+
+		console.log(addFunction(3,3), timesFunction(3,3));	// '6, 9가 기록된다.'
+
+		// 더 많이 사용되는 함수 정의 패턴과 비교해본다.
+
+		var addFunction2 = function( num1, num2 ){ return num1+num2; };	// 표현식 형태
+		function addFunction3( num1, num2 ){ return num1*num2; }		// 문장 형태
+
+		console.log(addFunction2(3,3), addFunction3(3,3));	// '6, 9가 기록된다.'
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
