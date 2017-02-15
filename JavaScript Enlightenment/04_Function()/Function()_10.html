@@ -9,17 +9,19 @@
 			return this;
 		}
 
-		console.log(myFunction());
+		console.log(myFunction());	// window
+
 
 		var myFunction = function(z,s,d){
 			return this;
 		}
 
-		console.log(myFunction())
-
 		var instanceFunction = new myFunction();
 
-		console.log(instanceFunction);
+		console.log(instanceFunction);		// myFunction
+
+
+		// 이 둘 차이를 잘 알아두자.
 
 	</script>
 </head>
