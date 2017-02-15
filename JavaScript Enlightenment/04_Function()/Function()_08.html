@@ -5,13 +5,9 @@
 	<title>javascriptFunctoin</title>
 	<script type="text/javascript">
 
-		var addFunction = function(number1, number2){
-			var sum = number1 + number2;
-			return sum;
-		}
-
-		console.log(addFunction(3,3));	// 6이 기록된다.
-
+		var foo = function foo(){
+			console.log(arguments.callee);		// foo()가 기록된다.
+		}();
 
 	</script>
 </head>

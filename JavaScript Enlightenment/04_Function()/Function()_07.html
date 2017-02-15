@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascriptFunctoin</title>
+	<script type="text/javascript">
+
+		var myObject1 = {
+			name: 'myObject1',
+			myMethod : function(){console.log(this)}
+		}
+
+		myObject1.myMethod();		// myObject1이 기록된다.
+
+		var myObject2 = function(){console.log(this)}
+
+		myObject2();		// window가 기록된다.
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
