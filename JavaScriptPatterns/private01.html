@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>private</title>
+	<script type="text/javascript">
+		function Gadget(){
+			// 비공개 멤버
+			var person = {
+				name: 'seolran',
+			}
+			// 공개된 함수
+			this.getName = function(){
+				return person;
+			};
+		};
+
+		var toy = new Gadget();
+
+		// name은 비공개
+		console.log(toy.person);	// undefined
+
+		console.log(toy.getName());	// seolran
+
+		// 허점
+		toy.getName().name = 'test';
+		console.log(toy.getName());
+
+
+		var Person = function(name, gender, age){
+
+			var private = 'protect';
+			this.name = name;
+			this.gender = gender;
+			this.age = age;
+			this.getGender = function(){
+				return this.gender;
+			};
+			this.getPrivate = function(){
+				return private;
+			}
+		};
+
+		var seolran = new Person('seolran', 'male', 28);
+
+		console.log(seolran.private);	// undefined
+		console.log(seolran.getPrivate());
+		console.log(seolran.getGender());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

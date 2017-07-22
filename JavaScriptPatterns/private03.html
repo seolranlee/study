@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>private</title>
+	<script type="text/javascript">
+
+		function Gadget(){
+
+			// 비공개 멤버
+			var name = 'iPod';
+
+			// 공개 함수
+			this.getName = function(){
+				return name;
+			};
+		};
+
+		Gadget.prototype = (function(){
+			// 비공개 멤버
+			var broswer = 'Mobile Webkit';
+
+			// 공개된 프로토타입 멤버
+			return {
+				getBroswer: function(){
+					return broswer;
+				}
+			};
+		}());
+
+		var toy = new Gadget();
+
+		console.log(toy.getName());
+		console.log(toy.getBroswer());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>private</title>
+	<script type="text/javascript">
+
+		var myobj;
+		(function(){
+
+			var name = 'my, oh my';
+			myobj = {
+				getName: function(){
+					return name;
+				},
+			};
+
+		}());
+
+		console.log(myobj.getName());	// my, oh my;
+
+		var myobj = (function(){
+
+			var name = 'my, oh my';
+			return {
+				getName: function(){
+					return name;
+				},
+			};
+		}());
+
+		console.log(myobj.name);	// undefined
+		console.log(myobj.getName());	// my, oh my
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

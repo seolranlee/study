@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>비공개 프로퍼티와 메서드</title>
+	<script type="text/javascript">
+
+		////////////////// 비공개 프로퍼티와 메서드 //////////////////
+
+
+
+		////////////////// 공개 멤버 //////////////////
+		var myobj = {
+			myprop: 1,
+			getProp: function(){
+				return this.myprop;
+			}
+		};
+
+		console.log(myobj.myprop);	// 1	// 공개적으로 접근 가능
+		console.log(myobj.getProp());	// 1	// 공개적으로 접근 가능
+
+
+		function Gadget(){
+			this.name = 'iPod';
+			this.stretch = function(){
+				return 'iPad';
+			};
+		};
+
+		var toy = new Gadget();
+		console.log(toy.name);	// iPod	// name은 공개되어 있다.
+		console.log(toy.stretch());	// iPad	// strech()도 공개되어 있다.
+
+
+
+
+
+		////////////////// 비공개 멤버 //////////////////
+		function Gadget2(){
+			// 비공개 멤버
+			var name = 'iPod';
+			// 공개된 함수
+			this.getName = function(){
+				return name;
+			};
+		};
+
+		var toy2 = new Gadget2();
+
+		console.log(toy2.name);	// 'name'은 여기서 비공개이므로 undefined.접근할 수 없다.
+
+		// 공개 메서드에서는 'name'에 접근할 수 있다.
+		console.log(toy2.getName());	// iPod.
+
+
+
+
+		// 객체 리터럴과 비공개 멤버
+		// 비공개 멤버를 만드는 데 생성자 말고 객체 리터럴로 생성
+		// 비공개(보호할) 데이터를 함수로 감싸기만 하면 된다.
+
+
+		var myobj;	// 이 변수에 객체를 할당
+		(function(){
+			// 비공개 멤버
+			var name = 'wendy';
+			
+			// 공개될 부분 구현
+			// var를 쓰지 않았다는 걸 유념
+			myobj = {
+				getName: function(){
+					return name;
+				},
+			};
+		}());
+
+		console.log(myobj.name);	// undefined
+		console.log(myobj.getName());	// wendy
+
+
+		// 개념 동일, 다르게 구현
+		var myobj2 = (function(){
+
+			// 비공개 멤버
+			var name = 'wendy';
+
+
+			// 공개될 부분
+			return {
+				getName: function(){
+					return name;
+				},
+			};
+		}());
+
+		console.log(myobj2.name);	// undefined
+		console.log(myobj2.getName());	// wendy
+
+
+		////////////////// 프토토타입과 비공개 멤버 //////////////////
+
+		function Gadget3(){
+
+			// 비공개 멤버
+			var name = 'redvelvet';
+			// 공개 함수
+			this.getName = function(){
+				return name;
+			};
+		};
+
+		Gadget3.prototype = (function(){
+
+			// 비공개 멤버
+			var broswer = 'Mobile Webkit';
+
+			// 공개 멤버
+			return {
+				getBroswer: function(){
+					return broswer;
+				},
+			};
+		}());
+
+		var toy3 = new Gadget3();
+
+		console.log(toy3.getName());	// redvelvet	// 객체 인스턴스의 특권 메서드
+		console.log(toy3.getBroswer());	// Mobile Webkit	// 프로토타입의 특권 메서드
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
