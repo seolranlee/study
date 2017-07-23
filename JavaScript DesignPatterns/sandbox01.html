@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sandbox</title>
+	<script type="text/javascript">
+
+
+		////////////////////// 1. 샌드박스 생성자 구현 //////////////////////
+		//Sandbox()생성자를 구현
+		function Sandbox(){
+
+			// argumnets를 배열로 바꾼다.
+			var args = Array.prototype.slice.call(arguments);
+			
+			// 마지막 인자는 콜백 함수다.
+			var callback = args.pop();
+			
+			// 모듈은 배열로 전달될 수도 있고 개별 인자로 전달될 수도 있다.
+			var modules = (args[0] && typeof args[0] === 'string') ? args : args[0];
+			// 해석이 필요하다...
+
+
+			var i;
+
+			// 함수가 생성자로 호출될 수 있도록 보장한다.
+			if(!(this instanceof Sandbox)){
+				return new Sandbox(modules, callback);
+				// this가 인스턴스가 아니면 생성자 함수 호출
+			}
+
+			// this에 필요한 프로퍼티들을 추가한다.
+			this.a = 1;
+			this.b = 2;
+
+
+			// 코어 'this'객체에 모듈을 추가한다.
+			
+			// 모듈이 없거나 "*" 이면 사용 가능한 모든 모듈을 사용한다는 의미다.
+			if(!modules || modules === '*' || modules[0] === '*'){
+				modules = [];
+				for(i in Sandbox.modules){
+					// 여기서 i는 프로퍼티 명을 받아온다.
+					if(Sandbox.modules.hasOwnProperty(i)){
+						// hasOwnProperty() 메소드는 객체가 특정 프로퍼티를 가지고 있는지를  나타내는 불리언 값을 반환한다.
+						modules.push(i);
+						// Sandbox.modules 안에 프로퍼티들이 들어간다.
+					}
+
+				}
+			}
+
+
+			// 필요한 모듈들을 초기화한다.
+			for(i = 0; i < modules.length; i += 1){
+				Sandbox.modules[modules[i]](this);
+			}
+			// 이 부분이 실행되면 키 안에 값이 들어가게 되는건가?
+
+			// 콜백함수를 호출한다.
+			callback(this);
+
+		}
+		// Sandbox()
+
+
+		// 필요한 프로토타입 프로퍼티들을 추가한다.
+		Sandbox.prototype = {
+			name: 'My Application',
+			version: '1.0',
+			getName : function(){
+				return this.name;
+			}
+		};
+
+
+
+		////////////////////// 2. 샌드박스 모듈 생성 //////////////////////
+
+		// 샌드박스 모듈 객체 생성
+		Sandbox.modules = {};
+
+		// 모듈의 이름이 키가 되고 각 모듈을 구현한 함수가 값이 된다.
+
+		// dom 모듈 작성 예제
+		Sandbox.modules.dom = function(box){
+			box.getNmae = function(){
+				console.log('DOM 이름');
+			};
+			box.getStyle = function(){
+				console.log('DOM 스타일')
+			};
+			box.getdom = 'DOMdom';
+		};
+
+		// foo 모듈 작성 예제
+		Sandbox.modules.event = function(box){
+			box.getAttach = function(){
+				console.log('event 붙이기');
+			};
+			box.getDetach = function(){
+				console.log('event 떼어내기');
+			};
+			box.getFoo = 'Foofoo';
+		};
+
+
+		////////////////////// 3. 샌드박스 모듈 호출 //////////////////////
+
+
+		// dom 모듈만 불러온다.
+		console.log('dom 모듈만 불러온다.');
+		Sandbox('dom', function(box){
+			console.log(box);
+		});
+
+		// event 모듈만 불러온다.
+		console.log('event 모듈만 불러온다.')
+		Sandbox('event', function(box){
+			console.log(box);
+		});
+
+		// 전체 모듈을 불러온다.
+		console.log('전체 모듈을 불러온다.')
+		Sandbox('*', function(box){
+			console.log(box);
+		});
+
+		Sandbox(['dom', 'event'], function(box){
+			console.log(box);
+		});
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
