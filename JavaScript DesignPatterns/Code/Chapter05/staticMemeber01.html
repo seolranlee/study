@@ -55,36 +55,6 @@
 		// 이 경우 스태틱 메서드 안에서 this를 사용할 때 주의를 기울여야 한다.
 		console.log(Gadget.isShiny());	// 여기서 this는 Gadget생성자를 가리킨다.
 		console.log(iphone.isShiny());	// 여기서 this는 iphone을 가리킨다.var Gadget = function(){};
-
-		Gadget.isShiny = function(){
-			// return 'you bet';
-			return this;
-		};
-
-		Gadget.prototype.setPrice = function(price){
-			this.price = price;
-		};
-
-		console.log(Gadget.isShiny());	// you bet
-
-		var iphone = new Gadget();
-		iphone.setPrice(500);
-		console.log(iphone.price);
-		// 인스턴스 메서드를 스태틱 메서드와 같은 방법으로 호출하면 동작하지 않는다.
-		// 스태틱 메서드 역시 인스턴스인 iphone객체를 사용해 호출하면 동작하지 않는다.
-
-		console.log(typeof Gadget.setPrice);	// undefined
-		console.log(typeof iphone.isShiny);	// undefined
-
-		// 스태틱 메서드가 인스턴스를 통해 호출했을 때도 동작한다면 편리한 경우가 있을 수 있다.
-
-		Gadget.prototype.isShiny = Gadget.isShiny;
-		console.log(Gadget.isShiny());	// 'you bet' 접근 가능.
-
-
-		// 이 경우 스태틱 메서드 안에서 this를 사용할 때 주의를 기울여야 한다.
-		console.log(Gadget.isShiny());	// 여기서 this는 Gadget생성자를 가리킨다.
-		console.log(iphone.isShiny());	// 여기서 this는 iphone을 가리킨다.
 	</script>
 </head>
 <body>
