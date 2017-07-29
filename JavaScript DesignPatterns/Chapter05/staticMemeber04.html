@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>static member</title>
+	<script type="text/javascript">
+
+		// 개별 객체는 유일성을 가진다.
+		// 유일한 식별자는 기능성을 많이 가질 수 있으니 특권 메서드로 노출시킬 수도 있다.
+
+		// 생성자
+		var Gadget = (function(){
+
+			// 스태틱 변수/프로퍼티
+			var counter = 0;
+			var NewGadget;
+
+			// 이 부분이 생성자를 새롭게 구현한 부분이다.
+			NewGadget = function(){
+				counter += 1;
+			};
+
+			// 특권 메서드
+			NewGadget.prototype.getLastId = function(){
+				return console.log(counter);
+			};
+
+			// 생성자를 덮어쓴다.
+			return NewGadget;
+			// 함수가 리턴 > 클로저 생성
+
+		}());	// 즉시 실행한다.
+
+
+		// 새로운 버전을 테스트해보자.
+		var iphone = new Gadget();
+		iphone.getLastId();	// 1
+		
+		var ipod = new Gadget();
+		ipod.getLastId();	// 2
+
+		var ipad = new Gadget();
+		ipad.getLastId();	// 3
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

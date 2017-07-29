@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>method()</title>
+	<script type="text/javascript">
+
+		//////////////// method() 메서드 ////////////////
+
+		// this에 인스턴스 메서드를 추가하게 되면 인스턴스마다 메서드가 재생성되어 메모리를 잡아먹어 비효율적
+
+		// 예를 들면
+
+		var People = function(name, age, gender) {
+
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+
+			// 재생성되는 프로퍼티들
+		};
+
+		var seolran = new People('seolran', 28, 'female');
+		var jaehun = new People('jaehun', 26, 'male');
+		console.log(seolran, jaehun);
+
+
+		// 그러므로, 재사용 가능한 메서드는 생성자의 prototype 프로퍼티에 추가되어야 한다.
+		// 그런데 prototype이란 것이 다른 개발자들에게는 낯선 개념일 수 있기 때문에 mehtod() 라는 메서드 속에 숨겨둔다.
+
+		// 메서드 함수 추가
+
+		// method 함수 추가
+		(function(){
+		    if (typeof Function.prototype.method !== 'function'){
+		        Function.prototype.method = function(n, fn){
+		 
+		            if (typeof n !== 'string' || n.length === 0) return false;
+		            if (typeof fn !== 'function') return false;
+		           
+		            this.prototype[n] = fn;
+		 
+		            return this;
+		        }
+		    };
+		})();
+
+		var Person = function(name){
+			this.name = name;
+		}.method('getName', function(){
+			return this.name;
+		}).method('setName', function(name){
+			this.name = name;
+			return this;
+		});
+
+			// 체이닝 기법 사용
+
+			var wendy = new Person('wendy');
+			console.log(wendy);	// name 프로퍼티만 있다.
+			console.log(wendy.getName());	// wendy
+			console.log(wendy.setName('wan').getName());	// wan
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

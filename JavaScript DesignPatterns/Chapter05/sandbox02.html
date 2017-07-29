@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>sandbox</title>
+	<script type="text/javascript">
+
+		// 샌드박스 생성자 구현
+		function Sandbox(){
+
+			// arguments를 배열로 바꾼다.
+			var args = Array.prototype.slice.call(arguments);
+			// args는 배열이 된다.
+
+			// 마지막 인자는 콜백 함수이다.
+			var callback = args.pop();
+			// pop 메서드는 배열에서 마지막 요소를 제거하여 그 값을 호출자(caller)에게 반환합니다.
+
+			// 모둘은 배열로 전달될 수도 있고 개별 인자로 전달될 수도 있다.
+			var modules = (args[0] && typeof args[0] = 'string') ? args : args[0];
+
+			var i;
+
+			// 함수가 생성자로 호출될 수 있도록 보장한다.
+			if(this instanceof Sandbox){
+				return new Sandbox(modules, callback);
+			}
+
+			// this에 필요한 프로터피들을 추가한다.
+			this.a = 1;
+			this.b = 2;
+
+			// 코어 'this'객체에 모듈을 추가한다.
+
+			// 모듈이 없거나 "*"이면 사용 가능한 모든 모듈을 사용한다.
+			if(!moduels || modules === "*" || moduels[0] === "*"){
+				moduels = [];
+				for( i in Sandbox.moduels ){
+
+					// 여기서 i는 프로퍼티 명을 받아온다.
+					if(Sandbox.moduels.hasOwnProperty(i)){
+						moduels.push(i);
+					}
+				}
+			}
+
+		}
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>static member</title>
+	<script type="text/javascript">
+		
+		//////////////// 비공개 스태틱 멤버 ////////////////
+
+		// 비공개 스태틱 멤버란
+		// 1. 동일한 생성자 함수로 생성된 객체들이 공유하는 멤버다.
+		// 2. 생성자 외부에서는 접근할 수 없다.
+
+
+		// 1. 먼저 클로저 함수를 만들고
+		// 2. 비공개 멤버를 이 함수로 감싼 후
+		// 3. 즉시 실행한 결과로 새로운 함수를 반환하게 한다.
+		// 4. 반환되는 함수는 Gadget 변수에 할당되어 새로운 생성자가 될 것이다.
+
+		var Gadget = (function(){
+
+			// 스태틱 변수/프로퍼티
+			var counter = 0;
+
+			// 생성자의 새로운 구현 버전을 반환한다.
+			return function(){
+				console.log(counter+=1);
+			};
+
+		}());	// 즉시 실행
+
+		var g1 = new Gadget();	// 1
+		var g2 = new Gadget();	// 2
+		var g3 = new Gadget();	// 3
+
+		// 개별 객체는 유일성을 가진다.
+		// 유일한 식별자는 기능성을 많이 가질 수 있으니 특권 메서드로 노출시킬 수도 있다.
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

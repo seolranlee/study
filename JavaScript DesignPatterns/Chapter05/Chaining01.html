@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>const</title>
+	<script type="text/javascript">
+
+		//////////////// 체이닝 패턴 ////////////////
+
+		// 객체에 연쇄적으로 메서드를 호출할 수 있도록 하는 패턴 > jQuery에 많이 쓰인다.
+		// 앞선 메서드에 의미있는 반환값이 존재하지 않늗다면 현재 작업중인 객체 인스턴스인 this를 반환하게 하는 원리
+
+		var obj = {
+			value: 1,
+			increment : function(){
+				this.value += 1;
+				return this;
+			},
+			add: function(v){
+				this.value += v;
+				return this;
+			},
+			shout: function(){
+				alert(this.value);
+			}
+		};
+
+		// 메서드 체이닝 호출
+		obj.increment().add(3).shout();	// 5	// 한번 증가시키고 3 더해서.
+
+
+		// 체이닝 기법을 안쓴다면
+		// obj.increment();
+		// obj.add(3);
+		// obj.shout();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

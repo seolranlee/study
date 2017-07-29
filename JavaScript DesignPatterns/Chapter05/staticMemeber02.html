@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>static member</title>
+	<script type="text/javascript">
+		
+		//////////////// 공개 스태틱 멤버 ////////////////
+		
+		// 생성자
+		var Gadget = function(price){
+			this.price = price;
+		};
+
+		// 스태틱 메서드
+		Gadget.isShiny = function(){
+
+			var msg = 'you bet';
+
+			if(this instanceof Gadget){
+				msg += ", it costs $" + this.price + '!';
+			}
+
+			return msg;
+		};
+
+		// 프로토타입에 일반적인 메서드르 추가한다.
+		Gadget.prototype.isShiny = function(){
+			// return Gadget.isShiny();
+			// return this;
+			return Gadget.isShiny.call(this);
+		};
+
+		// Gadget.prototype.isShiny = Gadget.isShiny;
+		// 이거 써도 되는데 차이가 무엇인지?
+
+		// call 내장 메서드
+		// http://hmmim.tistory.com/9
+
+		console.log(Gadget.isShiny());	// you bet
+
+		var a = new Gadget();
+		console.log(a.isShiny());	// you bet, it costs $undefined!
+
+		var b = new Gadget(500);
+		console.log(b.isShiny());	// you bet, it costs $500!
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

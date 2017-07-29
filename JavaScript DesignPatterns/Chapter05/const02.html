@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>const</title>
+	<script type="text/javascript">
+
+		//////////////// 객체 상수 ////////////////
+
+		// 범용 constant 객체 구현
+		// 다음과 같은 메서드 제공
+
+		// 1. set(name, value) : 새로운 상수를 정의한다.
+		// 2. isDefined(name) : 특정 이름의 상수가 있는지 확인한다.
+		// 3. get(name) : 상수의 값을 가져온다.
+
+		var constant = (function(){
+
+			var constants = {};
+			var ownProp = Object.prototype.hasOwnProperty;
+			var allowed = {
+				string: 1,
+				number: 1,
+				boolean: 1,
+			};
+			var prefix = (Math.random() + '_').slice(2);
+
+			return {
+				set: function (name, value){
+
+					if(this.isDefined(name)){
+						return false;
+					}
+					if(!ownProp.call(allowed, typeof value)){
+						return false;
+					}
+					constants[prefix + name] = value;
+					return true;
+
+
+				},
+				isDefined: function(name){
+
+					return ownProp.call(constants, prefix + name);
+
+				},
+				get: function(name){
+
+					if(this.isDefined(name)){
+						return constants[prefix + name];
+					}
+					return null;
+				}
+			};
+
+		}());
+
+
+		// 이미 정의되었는지 확인한다.
+		console.log(constant.isDefined('maxwidth'));	// false
+
+		// 정의한다.
+		console.log(constant.set('maxwidth', 480));	// true
+
+		// 정의되었는지 다시 확인해본다.
+		console.log(constant.isDefined('maxwidth'));	// true
+
+		// 다시 정의를 시도해본다.
+		console.log(constant.set('maxwidth', 320));	// false
+
+		// 값은 그대로인가?
+		console.log(constant.get('maxwidth'));	// 480 // 그대로이다.	// set이 잘 동작한다는거.
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

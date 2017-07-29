@@ -15,6 +15,7 @@
 			
 			// 마지막 인자는 콜백 함수다.
 			var callback = args.pop();
+			// console.log(this);
 			
 			// 모듈은 배열로 전달될 수도 있고 개별 인자로 전달될 수도 있다.
 			var modules = (args[0] && typeof args[0] === 'string') ? args : args[0];
@@ -30,6 +31,8 @@
 			}
 
 			// this에 필요한 프로퍼티들을 추가한다.
+			// 여기서 this는 인스턴스화 된 box임.
+			// Sandbox 호출시 마지막 인자의 콜백 함수의 인자임.
 			this.a = 1;
 			this.b = 2;
 
@@ -52,13 +55,18 @@
 
 
 			// 필요한 모듈들을 초기화한다.
+			// 다시말해 각 모듈을 구현한 함수를 호출한다.
 			for(i = 0; i < modules.length; i += 1){
 				Sandbox.modules[modules[i]](this);
 			}
-			// 이 부분이 실행되면 키 안에 값이 들어가게 되는건가?
+			// Sandbox.modules[getAttach](box);
+
+
 
 			// 콜백함수를 호출한다.
 			callback(this);
+			// callback(box);
+			// console.log(box);
 
 		}
 		// Sandbox()
@@ -67,6 +75,7 @@
 		// 필요한 프로토타입 프로퍼티들을 추가한다.
 		Sandbox.prototype = {
 			name: 'My Application',
+			design: 'SandBox Pattern',
 			version: '1.0',
 			getName : function(){
 				return this.name;
@@ -129,6 +138,17 @@
 		Sandbox(['dom', 'event'], function(box){
 			console.log(box);
 		});
+
+
+		// 이런식으로 콜백 함수 써도 됨.
+		Sandbox(['dom','event'], seolranPlayGround);
+		
+		function seolranPlayGround(box){
+			console.log(box.design);
+			// console.log(box.__proto__.deisgn);	// undefined
+			// console.log(box.prototype.design);	// undefined
+		};
+
 
 
 	</script>
