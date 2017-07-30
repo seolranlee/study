@@ -65,8 +65,6 @@
 
 			// 콜백함수를 호출한다.
 			callback(this);
-			// callback(box);
-			// console.log(box);
 
 		}
 		// Sandbox()
@@ -93,7 +91,7 @@
 
 		// dom 모듈 작성 예제
 		Sandbox.modules.dom = function(box){
-			box.getNmae = function(){
+			box.getName = function(){
 				console.log('DOM 이름');
 			};
 			box.getStyle = function(){
