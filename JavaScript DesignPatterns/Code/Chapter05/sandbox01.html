@@ -19,12 +19,12 @@
 			
 			// 모듈은 배열로 전달될 수도 있고 개별 인자로 전달될 수도 있다.
 			var modules = (args[0] && typeof args[0] === 'string') ? args : args[0];
-			// 해석이 필요하다...
 
 
 			var i;
 
 			// 함수가 생성자로 호출될 수 있도록 보장한다.
+			// 책 57pg 참고
 			if(!(this instanceof Sandbox)){
 				return new Sandbox(modules, callback);
 				// this가 인스턴스가 아니면 생성자 함수 호출
