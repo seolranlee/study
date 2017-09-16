@@ -395,109 +395,33 @@ first_sript.parentNode.insertBefore(script, first_sript)
 여기서 first_sript는 페이지 내에 존재하는 스크립트 엘리먼트, script는 새로 생성한 스크립트 엘리먼트.
 
 
-###게으른 로딩
-게으른 로딩은 외부 파일을 페이지의 load이벤트 이후에 로드하는 기법. 대체로 큰 묶음의 코드를 다음과 같이 두 부분으로 나눈 것이 유리.
-
-- 페이지를 초기화 하고 이벤트 핸들러를 UI 엘리먼트에 붙이는 **핵심 코드**를 첫번째 부분으로 정한다.
-- 사용자 인터랙션이나 다른 조건들에 의해서만 (사용자의 동작에 의해 작동하는)필요한 코드를 두 번째 부분으로 나눈다.
-
-게으른 로딩의 목적은 페이지를 **점진적으로 로드하고**가능한 빨리 무언가를 동작시켜 사용할 수 있게 하는 것. 나머지는 사용자가 페이지를 살펴보는 동안 백그라운드에서 로드.
-
-
-
-###주문형 로딩
-게으른 로딩의 개선 코드. 사용자가 어떤 동작을 문서에 접속 후 한번도 하지 않는다면? 주문형 로딩 패턴을 적용하면 이러한 경우 효율적으로 대응 가능.
-
-로드할 스크립트의 파일명과, 이 스크립트가 로드된 후에 실행될 콜백 함수를 받은 ``require()``함수 또는 메서드를 만든다.
+###``<script>``엘리먼트 붙이기
+일반적으로 스크립트는 문서의 ``<head>``에 추가된다. 그러나 스크립트는 ``<body>``를 포함한 어떤 엘리먼트에도 붙일 수 있다.
 
 ```javascript
-require("extra.js", function() {
-  functionDefinedInExtraJS();
-});
+document.documentElement.firstChild.appendChild(script);
+//documentElement는 <html>을 가리키고 그 첫번째 자식은 <head>
 ```
 
-이 함수의 구현법
+다음과 같은 방법도 일반적
 
 ```javascript
-function require(file, callback) {
-  var script = document.getElementsByIdTagName('script')[0],
-      newjs = document.createElement('script');
-
-  // IE
-  newjs.onreadystatechange = function () {
-    if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
-      newjs.onreadystatechange = null;
-      callback();
-    }
-  };
-
-  // 그외 브라우저
-  newjs.onload = function () {
-    callback();
-  };
-
-  newjs.src = file;
-  script.parentNode.insertBefore(newjs, script);
-}
+document.getElementsByTagName('head')[0].appendChild(script);
 ```
 
-
-- IE에서는 ``readystatchange`` 이벤트를 구독하고 ``readyState`` 값이 "loaded" 또는 "complete"인지 확인한다. 다른 모든 브라우저는 이를 무시한다.
-- 파이어폭스, 사파리, 오페라에서는 ``onload`` 프로퍼티로 ``load`` 이벤트를 구독한다.
-- 이 방법은 Safari 2버전에서는 동작하지 않는다. 이 브라우저도 지원해야 한다면 특정변수(추가적인 파일에서 선언된거)가 정의되었는지를 반복적으로 확인하도록 타이머로 시간 간격을 설정해야 한다. 정의가 되었다면, 새로운 스크립트가 로드되고 실행되었다는 뜻이다.
-
-
-네트워크 지연을 흉내내기 위해 인위적으로 지연시킨 ondemnad.js.php라는 스크립트를 생성하여 구현을 테스트할 수 있다.
-
-```php
-<?php
-  header('Content-Type: application/javascript');
-  sleep(1);
-?>
-function extraFunction(logthis) {
-  console.log('loaded and executed');
-  console.log(logthis);
-}
-```
-
-``require()`` 함수 테스트
+마크업을 직접 제어하고 있다면 문제가 없으나, 어떤 구조의 페이지에 삽입될지 알 수 없다면 ``document.body``로.(``<body>``가 없이도 대부분 확실히 동작)
 
 ```javascript
-require('ondemand.js.php', function () {
-  extraFunction('loaded from the parent page');
-  document.body.appendChild(document.createTextNode('done!'));
-});
+document.body.appendChild(script);
 ```
 
-http://jspatterns.com/books/7/ondemand.html 에서 확인가능.
-
-###자바스크립트 사전 로딩
-이 방법을 이용하면 사용자가 두번째 페이지에 도착했을 때 이미 스크립트가 로드되어 있기 때문에 전체적으로 더 빠른 속도를 경험.
-사전 로딩은 동적 스크립트 패턴으로 간단히 구현. 
+페이지에서 스크립트를 실행한다는 건 최소 하나의 스크립트 태그가 존재한다는 것. 이를 이용해 페이지 내에서 찾아낸 첫번째 엘리먼트에 ``insertBefore()``로 스크립트를 붙일 수도 있다.
 
 ```javascript
-var obj = document.createElement('object');
-obj.data = "preloadme.js";
-document.body.appendChild(obj);
+var script = document.createElement('script');
+script.src = 'bundle.js';
+var first_sript = document.getElementsByTagName('script')[0];
+first_sript.parentNode.insertBefore(script, first_sript)
 ```
 
-
-```javascript
-var preload;
-if (/*@cc_on!@*/false) { //조건 주석문으로 IE를 탐지
-  preload = function (file) {
-    new Image().src = file;
-  };
-} else {
-  preload = function (file) {
-    var obj = document.createElement('object'),
-    body = document.body;
-    obj.width = 0;
-    obj.height = 0;
-    obj.data = file;
-    body.appendChild(obj);
-  };
-}
-
-preload('my_web_worker.js'); 
-```
+여기서 first_sript는 페이지 내에 존재하는 스크립트 엘리먼트, script는 새로 생성한 스크립트 엘리먼트.
