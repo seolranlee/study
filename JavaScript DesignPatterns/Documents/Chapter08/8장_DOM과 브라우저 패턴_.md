@@ -217,7 +217,7 @@ type 속성은 HTML4와 XMTML1 표준에서는 필수 속성이지만, 반드시
 
 모든 스크립트 파일을 하나로 병합하는 것은 그나마 나은 방법이다.
 
-```js
+```javascript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -233,7 +233,7 @@ type 속성은 HTML4와 XMTML1 표준에서는 필수 속성이지만, 반드시
 
 가장 좋은 방법은 병합된 스크립트를 페이지의 맨 마지막에 두는 것이다.
 
-```js
+```javascript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -253,7 +253,7 @@ HTTP 프로토콜은 소위 chunked 인코딩을 지원한다. 이를 이용해 
 간단한 전략 중 하나로 페이지의 나머지 부분이 만들어지는 동안 ``<head>``부분을 첫 번째 조각으로 전송하는 방법이 있다. 다시 말해서 다음과 같은 형태가 될 수 있다.
 
 
-```js
+```javascript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -271,7 +271,7 @@ HTTP 프로토콜은 소위 chunked 인코딩을 지원한다. 이를 이용해 
 
 자바스크립트를 다시 ``<head>``안에 집어 넣고 첫 번째 조각으로 전송하면 간단하게 조금 더 개선할 수 있다. 이렇게 하면 서버 측에서 페이지의 나머지 부분이 준비되는 동안 브라우저는 문서 상단부 head 안에 있는 스크립트 파일을 다운로드하기 시작한다.
 
-```js
+```javascript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -289,7 +289,7 @@ HTTP 프로토콜은 소위 chunked 인코딩을 지원한다. 이를 이용해 
 
 페이지 맨 마지막에 세 번째 조각을 두어 스크립트만 모아놓고 전송하는게 가장 좋은 방법. 모든 페이지의 상단이 어느 정도 정적인 내용으로 구성되어 있다면 첫 번째 조각에 본문 ``<body>``의 일부분까지 포함시킬 수도 있다.
 
-```js
+```javascript
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -344,7 +344,7 @@ var mynamespace={
 
 그리고 나서 각 인라인 스크립트를 함수로 감싸 inline_scripts 배열 안에 넣는다.
 
-```js
+```javascript
 // 수정 전:
 <script>console.log('I am Inline')</script>
 
@@ -366,26 +366,26 @@ for(i = 0; i < max; max += 1){
 ###``<script>``엘리먼트 붙이기
 일반적으로 스크립트는 문서의 ``<head>``에 추가된다. 그러나 스크립트는 ``<body>``를 포함한 어떤 엘리먼트에도 붙일 수 있다.
 
-```js
+```javascript
 document.documentElement.firstChild.appendChild(script);
 //documentElement는 <html>을 가리키고 그 첫번째 자식은 <head>
 ```
 
 다음과 같은 방법도 일반적
 
-```js
+```javascript
 document.getElementsByTagName('head')[0].appendChild(script);
 ```
 
 마크업을 직접 제어하고 있다면 문제가 없으나, 어떤 구조의 페이지에 삽입될지 알 수 없다면 ``document.body``로.(``<body>``가 없이도 대부분 확실히 동작)
 
-```js
+```javascript
 document.body.appendChild(script);
 ```
 
 페이지에서 스크립트를 실행한다는 건 최소 하나의 스크립트 태그가 존재한다는 것. 이를 이용해 페이지 내에서 찾아낸 첫번째 엘리먼트에 ``insertBefore()``로 스크립트를 붙일 수도 있다.
 
-```js
+```javascript
 var script = document.createElement('script');
 script.src = 'bundle.js';
 var first_sript = document.getElementsByTagName('script')[0];
@@ -404,7 +404,7 @@ first_sript.parentNode.insertBefore(script, first_sript)
 게으른 로딩의 목적은 페이지를 **점진적으로 로드하고**가능한 빨리 무언가를 동작시켜 사용할 수 있게 하는 것. 나머지는 사용자가 페이지를 살펴보는 동안 백그라운드에서 로드.
 
 
-```js
+```javascript
 <!-- 페이지의 전체 본문 -->
 <script src='test.js'></script>
 <!-- 두번째 조각의 끝 -->
@@ -425,7 +425,7 @@ first_sript.parentNode.insertBefore(script, first_sript)
 
 로드할 스크립트의 파일명과, 이 스크립트가 로드된 후에 실행될 콜백 함수를 받은 ``require()``함수 또는 메서드를 만든다.
 
-```js
+```javascript
 require("extra.js", function() {
   functionDefinedInExtraJS();
 });
@@ -433,7 +433,7 @@ require("extra.js", function() {
 
 이 함수의 구현법
 
-```js
+```javascript
 function require(file, callback) {
   var script = document.getElementsByIdTagName('script')[0],
       newjs = document.createElement('script');
@@ -477,7 +477,7 @@ function extraFunction(logthis) {
 
 ``require()`` 함수 테스트
 
-```js
+```javascript
 require('ondemand.js.php', function () {
   extraFunction('loaded from the parent page');
   document.body.appendChild(document.createTextNode('done!'));
@@ -490,14 +490,14 @@ http://jspatterns.com/books/7/ondemand.html 에서 확인가능.
 이 방법을 이용하면 사용자가 두번째 페이지에 도착했을 때 이미 스크립트가 로드되어 있기 때문에 전체적으로 더 빠른 속도를 경험.
 사전 로딩은 동적 스크립트 패턴으로 간단히 구현. 
 
-```js
+```javascript
 var obj = document.createElement('object');
 obj.data = "preloadme.js";
 document.body.appendChild(obj);
 ```
 
 
-```js
+```javascript
 var preload;
 if (/*@cc_on!@*/false) { //조건 주석문으로 IE를 탐지
   preload = function (file) {
