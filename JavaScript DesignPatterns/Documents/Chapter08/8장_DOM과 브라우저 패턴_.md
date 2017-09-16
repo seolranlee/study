@@ -404,21 +404,6 @@ first_sript.parentNode.insertBefore(script, first_sript)
 게으른 로딩의 목적은 페이지를 **점진적으로 로드하고**가능한 빨리 무언가를 동작시켜 사용할 수 있게 하는 것. 나머지는 사용자가 페이지를 살펴보는 동안 백그라운드에서 로드.
 
 
-```javascript
-<!-- 페이지의 전체 본문 -->
-<script src='test.js'></script>
-<!-- 두번째 조각의 끝 -->
-<script>
-  window.onload = function(){
-    var script = document.createElement('script');
-    script.src = 'lazyload.js';
-    document.documentElement.firstChild.appendChild(script);
-  };
-</script>
-</body>
-</html>
-<!-- 세 번째 조각의 끝 -->
-```
 
 ###주문형 로딩
 게으른 로딩의 개선 코드. 사용자가 어떤 동작을 문서에 접속 후 한번도 하지 않는다면? 주문형 로딩 패턴을 적용하면 이러한 경우 효율적으로 대응 가능.
@@ -514,5 +499,5 @@ if (/*@cc_on!@*/false) { //조건 주석문으로 IE를 탐지
   };
 }
 
-preload('my_web_worker.js');
+preload('my_web_worker.js'); 
 ```
