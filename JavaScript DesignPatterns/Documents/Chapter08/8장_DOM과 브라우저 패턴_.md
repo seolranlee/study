@@ -6,20 +6,18 @@
 자바스크립트에서 서버와 통신할 수 있는 몇가지 방법을 알아보자.
 
 ### XMLHttpRequest
-- MDN Web docs참고
+- MDN Web docs 참고
 https://developer.mozilla.org/ko/docs/XMLHttpRequest
 
-XMLHttpRequest는 자바스크립트에서 HTTP요청을 생성하는 특별한 객체**(생성자 함수)**로, 현재 대부분의 브라우저에서 사용 가능하다. HTTP 요청을 만드는 과정은 다음 세 단계로 이루어진다.
+XMLHttpRequest는 자바스크립트에서 HTTP 요청을 생성하는 특별한 객체**(생성자 함수)**로, 현재 대부분의 브라우저에서 사용 가능하다. HTTP 요청을 만드는 과정은 다음 세 단계로 이루어진다.
 
 - 1. XMLHttpRequest객체(줄여서 XHR이라고도 한다.)를 설정한다.
-
-첫 번째 단계는 다음과 같이 매우 쉽다.
 
 ```javascript
 var xhr = new XMLHttpRequest();
 ```
 
-하지만 IE 7버전 이하에서는 XHR기능이 **ActiveX 객체(타입을 체크해보면 함수가 아닌 것)**로 구현되었기 때문에 별도의 처리가 필요하다.
+하지만 IE 7버전 이하에서는 XHR기능이 **ActiveX 객체(타입을 체크해보면 함수가 아닌 것이다.)**로 구현되었기 때문에 별도의 처리가 필요하다.
 
 ```javascript
 if( typeof XMLHttpRequest === 'function'){
@@ -111,7 +109,7 @@ var handleResponse = function(){
   xhr.send();
 
 
-  // 로컬에서 실행하면 아래와 같은 오류가 뜬다.
+  // 로컬에서 실행하면 아래와 같은 오류가 뜬다?
 
   // dom_01.html:57 XMLHttpRequest cannot load file:///Users/seolseol-lee/Desktop/js%E1%84%83%E1%85%B5%E1%84%8C%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AB%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB/8%E1%84%8C%E1%85%A1%E1%86%BC%20DOM%E1%84%80%E1%85%AA%20%E1%84%87%E1%85%B3%E1%84%85%E1%85%A1%E1%84%8B%E1%85%AE%E1%84%8C%E1%85%A5%20%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB/page.html. Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
 
@@ -155,16 +153,76 @@ myHandler({'hello': 'world'})
 ### JSONP 예제: Tic-tac-toe
 Tic-tac-toe 게임 예제를 통해 JSONP의 동작을 살펴보자. 이 게임의 플레이어는 클라이언트(브라우저)와 서버다. 두 플레이어는 1부터 9사이의 임의의 숫자를 생성하는데, 서버가 숫자를 생성할 순서가 되면 JSONP로 값을 가져올 것이다.
 
+(Tic-tac-toe게임 원리: 가로 세로 대각선으로 3개가 이어지면 이긴다.
+https://cdn.namuwikiusercontent.com/storage/4f4dcec30bc3dc3bdea1496fd584bae557c476e867105bdf6702546a5e449cb10a6544c651366ba2a10bc5d9c5d5e87d6af730feff5ce391cd42932ccd6b7dbabac6ce6770af489163f97327f3e5917e?e=1505930823&k=CxXTLsx-lPbsF6g6W8GlCw)
+
+예제게임은 http://jspatterns.com/book/8/ttt.html
+에서 실행
+
+```javascript
+```
+
 ### 프레임과 이미지 비컨(Image Beacons)
-원격 스크립팅을 위한 또 다른 바법으로 프레임을 사용하는 방법이 있다. 자바스크립트로 iframe을 생성하고 src에 URL을 지정하는 방식이다. 이 URL에는 데이터나 iframe 외부의 부모 페이지를 업데이트 하는 함수 호출을 포함할 수 있다.
+프레임은 자바스크립트로 iframe을 생성하고 src에 URL을 지정하는 방식이다. 이 URL에는 데이터나 iframe 외부의 부모 페이지를 업데이트 하는 함수 호출을 포함할 수 있다.
 
 원격 스크립팅의 가장 간단한 형태는 서버에 데이터를 보내기만 하고 응답을 필요로 하지 않는 것이다. 이런 경우에는 새로운 이미지를 만들고 이미지의 src를 서버의 스크립트로 지정하면 된다.
 
+```javascript
+new Image().src = 'http://example.org/some/page.php';
+```
+
+이 패턴이 이미지 비켠이다. 이 패턴은 서버에 로그를 남길 목적으로 데이터를 전송할 때 유용하다.(방문자의 정보를 수집할 때. 주로 고객의 정보를 수집하기 위해 메일에 많이 삽입하는 듯.)
+
+이미지 비켠에 대한 좀 더 직관적인 설명은 아래 URL을 참조.
+
+https://translate.google.co.kr/translate?hl=ko&sl=en&u=https://keen.io/docs/streams/image-beacon/&prev=search
 
 ## 8.6 자바스크립트 배포
 
-### 스크립트 병함
+### 스크립트 병합
+빠르게 로딩되는 페이지를 구축하기 위한 첫 번째 규칙은 가능한 외부 자원의 수를 줄이는 것이다.(HTTP 요청은 비용이 많이 든다.) 이러한 규칙에 따라 자바스크립트의 측면에서 외부 스크립트 파일들을 병합하면 페이지 로딩 시간을 크게 줄일 수 있다. 
 
+스크립트 병합은 **단순히 새로운 파일을 만들고 개별 파일의 내용을 하나로 붙여넣는 작업을 뜻한다.**(파일을 병합하면 디버깅이 어려워지기 때문에 개발 단계가 아닌 출시 직전에 적용)
+
+
+스크립트 병합의 단점
+- 출시 준비에 한 단계가 추가된다.(하지만 이는 쉽게 자동화 할 수 있다.)
+- 캐싱으로 인한 이득을 보지 못할 수 있다. 여러 파일 중 파일 하나만 약간 수정하더라도 전체 캐싱을 무효화 하게 된다.
+- 묶음을 구성하기 위한 명명 규칙 또는 버전 지정 패턴을 정할 필요가 있다.
+
+주로 귀찮음과 관련된 단점들임. 즉 하면 좋다.
+
+### 코드 압축과 gzip 압축
+코드 압축의 효과는 **주석과 공백**을 얼마나 많이 사용했는지, 그리고 **어떤 압축 도구**를 사용햇는지에 따라서 달라진다. 하지만 평균적으로 파일 크기를 **50퍼센트**정도 줄일 수 있다.
+또한 스크립트 파일을 항상 gzip압축을 적용해 전송해야 한다. 단 한번 gzip압축을 적용하도록 서버 설정을 변경하는 것으로 즉각적인 성능 향상을 기대할 수 있다.
+
+gzip압축을 적용하기 위해서는 아래 코드를 웹 루트의 .htaccess파일에 추가하면 된다.
+
+```
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+application/javascript application/json
+````
+
+gzip압축은 평균적으로 파일을 **70퍼센트**정도 작게 만든다. 
+
+
+### Expires헤더
+Expires 헤더 적용 또한 아래 코드를 웹 루트의 .htaccess파일에 추가하면 된다.이
+
+```
+ExpiresActive on
+ExpiresByType application/x-javascript "access plus 10 years"
+```
+
+### CDN 사용
+CDN은 콘텐츠 전송 네크워크를 말한다. CDN은 세계 곳곳의 서로 다른 여러 데이터에 파일의 복사본을 배치하여, 동일한 URL을 유지하면서도 더 빨리 사용자에게 전송해준다.
+
+- 구글은 인기 있는 오픈 소스 라이브러리들을 CDN으로 제공한다.
+- 마이크로소프는 jQuery와 자사 Ajax 라이브러리들을 제공한다.
+- 야후는 YUI 라이브러리를 CDN으로 제공한다.
+
+jQuery CDN
+http://jquery.com/download/#using-jquery-with-a-cdn
 
 ## 8.7 로딩 전략
 웹페이지에 스크립트를 포함시키는 방법은 간단하다. 다음과 같이 ``<script>``엘리먼트를 사용해 인라인 자바스크립트 코드를 쓰거나 src 속성에 개별 파일을 링크하면 된다.
@@ -487,14 +545,29 @@ require('ondemand.js.php', function () {
 http://jspatterns.com/books/7/ondemand.html 에서 확인가능.
 
 ### 자바스크립트 사전 로딩
-이 방법을 이용하면 사용자가 두번째 페이지에 도착했을 때 이미 스크립트가 로드되어 있기 때문에 전체적으로 더 빠른 속도를 경험.
-사전 로딩은 동적 스크립트 패턴으로 간단히 구현. 
+이 방법은 현재 페이지에서는 필요하지 않지만 다음으로 이동하게 될 페이지에서 필요한 스크립트를 미리 로드할 수 있음. 사용자가 두번째 페이지에 도착했을 때 이미 스크립트가 로드되어 있기 때문에 전체적으로 더 빠른 속도를 경험.
+
+그러나 스크립트가 이미 두 번째 페이지에서 실행되고 있다고 간주하여 에러가 발생할 수 있다. 예를 들어 특정 DOM 노드를 찾으려 한다면 에러가 발생할 것이다.
+
+스크립트가 파싱되거나 실행되지 않게 로드할 수도 있다. 이 방법은 CSS나 이미지파일에도 적용할 수 있다.
+
+IE에서는 이미지 비컨 패턴
+
+```javascript
+`new Image().src = "preloadme.js";
+```
+
+IE이외의 브라우저에서는 스크립트 엘리먼트 대신에 ``<object>`` 엘리먼트를 사용하고 data 속성 값에 로드할 스크립트의 URL을 가리키도록 지정하면 된다.
+
 
 ```javascript
 var obj = document.createElement('object');
 obj.data = "preloadme.js";
 document.body.appendChild(obj);
 ```
+
+
+``<object>``가 브라우저에 보이지 않게 하기 위해 width, height 값도 0으로 설정 범용의 preload() 함수나 메서드를 만들고 초기화 시점 분기 패턴(4장)으로 브라우저간의 차이를 처리할 수도 있다.
 
 
 ```javascript
@@ -516,3 +589,5 @@ if (/*@cc_on!@*/false) { //조건 주석문으로 IE를 탐지
 
 preload('my_web_worker.js'); 
 ```
+
+이 패턴의 단점은 사용자 에이전트 탐지 코드를 포함한다는 것이다. 이 경우에는 기능 탐지로는 브라우저의 동작을 충분히 알 수 없기 때문에 불가피한 경우에만 사용해야 한다.
