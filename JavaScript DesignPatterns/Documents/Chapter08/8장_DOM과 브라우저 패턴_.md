@@ -161,9 +161,9 @@ Tic-tac-toe 게임 예제를 통해 JSONP의 동작을 살펴보자. 이 게임�
 원격 스크립팅의 가장 간단한 형태는 서버에 데이터를 보내기만 하고 응답을 필요로 하지 않는 것이다. 이런 경우에는 새로운 이미지를 만들고 이미지의 src를 서버의 스크립트로 지정하면 된다.
 
 
-##8.6 자바스크립트 배포
+## 8.6 자바스크립트 배포
 
-###스크립트 병함
+### 스크립트 병함
 
 
 ## 8.7 로딩 전략
@@ -247,7 +247,7 @@ type 속성은 HTML4와 XMTML1 표준에서는 필수 속성이지만, 반드시
 </html>
 ```
 
-###HTTP Chunked 인코딩 사용
+### HTTP Chunked 인코딩 사용
 HTTP 프로토콜은 소위 chunked 인코딩을 지원한다. 이를 이용해 페이지를 몇 조각으로 나누어 전송할 수 있다. 복잡한 페이지에 chunked 인코딩을 적용하면, 서버측 작업이 완전히 끝날 때까지 기다릴 필요 없이, 상대적으로 정적인 페이지 상단 부분을 먼저 정송하기 시작할 수 있다.
 
 간단한 전략 중 하나로 페이지의 나머지 부분이 만들어지는 동안 ``<head>``부분을 첫 번째 조각으로 전송하는 방법이 있다. 다시 말해서 다음과 같은 형태가 될 수 있다.
@@ -314,7 +314,7 @@ HTTP 프로토콜은 소위 chunked 인코딩을 지원한다. 이를 이용해 
 이 접근 방법은 점진적인 개선과 무간섭적인 자바스크립트의 원칙에도 잘 들어맞는다 두 번째 HTML조각까지 완료된 직후에는 마치 브라우저에서 자바스크립트를 비활성화시킨 상태처럼 페이지가 완전히 로드되어 화면에 표시되고 사용가능 해야한다. 그리고 나서 세 번째 조각이 완료되면, 자바스크립트가 페이지를 햐상시키고 부가기능을 덧붙인다.
 
 
-###다운로드를 차단하지 않는 동적인 ``<script>``엘리먼트
+### 다운로드를 차단하지 않는 동적인 ``<script>``엘리먼트
 자바스큷티는 뒤이어 오는 파일들의 다운로드를 차단한다. 하지만 이를 방지할 수 있는 몇 가지 패턴이 있다.
 
 - XHR 요청으로 스크립트를 로딩한 다음 응답 문자열에 ``eval()``을 실행시키는 방법. 동일 도메인 제약이 따르고 그 자체로 안티패턴인 ``eval()``을 사용해야 한다는 단점이 있다.
@@ -363,7 +363,7 @@ for(i = 0; i < max; max += 1){
 }
 ```
 
-###``<script>``엘리먼트 붙이기
+### ``<script>``엘리먼트 붙이기
 일반적으로 스크립트는 문서의 ``<head>``에 추가된다. 그러나 스크립트는 ``<body>``를 포함한 어떤 엘리먼트에도 붙일 수 있다.
 
 ```javascript
@@ -395,33 +395,124 @@ first_sript.parentNode.insertBefore(script, first_sript)
 여기서 first_sript는 페이지 내에 존재하는 스크립트 엘리먼트, script는 새로 생성한 스크립트 엘리먼트.
 
 
-###``<script>``엘리먼트 붙이기
-일반적으로 스크립트는 문서의 ``<head>``에 추가된다. 그러나 스크립트는 ``<body>``를 포함한 어떤 엘리먼트에도 붙일 수 있다.
+### 게으른 로딩
+게으른 로딩은 외부 파일을 페이지의 load이벤트 이후에 로드하는 기법. 대체로 큰 묶음의 코드를 다음과 같이 두 부분으로 나눈 것이 유리.
+
+- 페이지를 초기화 하고 이벤트 핸들러를 UI 엘리먼트에 붙이는 **핵심 코드**를 첫번째 부분으로 정한다.
+- 사용자 인터랙션이나 다른 조건들에 의해서만 (사용자의 동작에 의해 작동하는)필요한 코드를 두 번째 부분으로 나눈다.
+
+게으른 로딩의 목적은 페이지를 **점진적으로 로드하고**가능한 빨리 무언가를 동작시켜 사용할 수 있게 하는 것. 나머지는 사용자가 페이지를 살펴보는 동안 백그라운드에서 로드.
+
 
 ```javascript
-document.documentElement.firstChild.appendChild(script);
-//documentElement는 <html>을 가리키고 그 첫번째 자식은 <head>
+<!-- 페이지의 전체 본문 -->
+<script src='test.js'></script>
+<!-- 두번째 조각의 끝 -->
+<script>
+  window.onload = function(){
+    var script = document.createElement('script');
+    script.src = 'lazyload.js';
+    document.documentElement.firstChild.appendChild(script);
+  };
+</script>
+</body>
+</html>
+<!-- 세 번째 조각의 끝 -->
 ```
 
-다음과 같은 방법도 일반적
+### 주문형 로딩
+게으른 로딩의 개선 코드. 사용자가 어떤 동작을 문서에 접속 후 한번도 하지 않는다면? 주문형 로딩 패턴을 적용하면 이러한 경우 효율적으로 대응 가능.
+
+로드할 스크립트의 파일명과, 이 스크립트가 로드된 후에 실행될 콜백 함수를 받은 ``require()``함수 또는 메서드를 만든다.
 
 ```javascript
-document.getElementsByTagName('head')[0].appendChild(script);
+require("extra.js", function() {
+  functionDefinedInExtraJS();
+});
 ```
 
-마크업을 직접 제어하고 있다면 문제가 없으나, 어떤 구조의 페이지에 삽입될지 알 수 없다면 ``document.body``로.(``<body>``가 없이도 대부분 확실히 동작)
+이 함수의 구현법
 
 ```javascript
-document.body.appendChild(script);
+function require(file, callback) {
+  var script = document.getElementsByIdTagName('script')[0],
+      newjs = document.createElement('script');
+
+  // IE
+  newjs.onreadystatechange = function () {
+    if (newjs.readyState === 'loaded' || newjs.readyState === 'complete') {
+      newjs.onreadystatechange = null;
+      callback();
+    }
+  };
+
+  // 그외 브라우저
+  newjs.onload = function () {
+    callback();
+  };
+
+  newjs.src = file;
+  script.parentNode.insertBefore(newjs, script);
+}
 ```
 
-페이지에서 스크립트를 실행한다는 건 최소 하나의 스크립트 태그가 존재한다는 것. 이를 이용해 페이지 내에서 찾아낸 첫번째 엘리먼트에 ``insertBefore()``로 스크립트를 붙일 수도 있다.
+
+- IE에서는 ``readystatchange`` 이벤트를 구독하고 ``readyState`` 값이 "loaded" 또는 "complete"인지 확인한다. 다른 모든 브라우저는 이를 무시한다.
+- 파이어폭스, 사파리, 오페라에서는 ``onload`` 프로퍼티로 ``load`` 이벤트를 구독한다.
+- 이 방법은 Safari 2버전에서는 동작하지 않는다. 이 브라우저도 지원해야 한다면 특정변수(추가적인 파일에서 선언된거)가 정의되었는지를 반복적으로 확인하도록 타이머로 시간 간격을 설정해야 한다. 정의가 되었다면, 새로운 스크립트가 로드되고 실행되었다는 뜻이다.
+
+
+네트워크 지연을 흉내내기 위해 인위적으로 지연시킨 ondemnad.js.php라는 스크립트를 생성하여 구현을 테스트할 수 있다.
+
+```php
+<?php
+  header('Content-Type: application/javascript');
+  sleep(1);
+?>
+function extraFunction(logthis) {
+  console.log('loaded and executed');
+  console.log(logthis);
+}
+```
+
+``require()`` 함수 테스트
 
 ```javascript
-var script = document.createElement('script');
-script.src = 'bundle.js';
-var first_sript = document.getElementsByTagName('script')[0];
-first_sript.parentNode.insertBefore(script, first_sript)
+require('ondemand.js.php', function () {
+  extraFunction('loaded from the parent page');
+  document.body.appendChild(document.createTextNode('done!'));
+});
 ```
 
-여기서 first_sript는 페이지 내에 존재하는 스크립트 엘리먼트, script는 새로 생성한 스크립트 엘리먼트.
+http://jspatterns.com/books/7/ondemand.html 에서 확인가능.
+
+### 자바스크립트 사전 로딩
+이 방법을 이용하면 사용자가 두번째 페이지에 도착했을 때 이미 스크립트가 로드되어 있기 때문에 전체적으로 더 빠른 속도를 경험.
+사전 로딩은 동적 스크립트 패턴으로 간단히 구현. 
+
+```javascript
+var obj = document.createElement('object');
+obj.data = "preloadme.js";
+document.body.appendChild(obj);
+```
+
+
+```javascript
+var preload;
+if (/*@cc_on!@*/false) { //조건 주석문으로 IE를 탐지
+  preload = function (file) {
+    new Image().src = file;
+  };
+} else {
+  preload = function (file) {
+    var obj = document.createElement('object'),
+    body = document.body;
+    obj.width = 0;
+    obj.height = 0;
+    obj.data = file;
+    body.appendChild(obj);
+  };
+}
+
+preload('my_web_worker.js'); 
+```
