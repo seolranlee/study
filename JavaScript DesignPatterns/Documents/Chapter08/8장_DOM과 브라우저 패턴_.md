@@ -20,7 +20,7 @@ var xhr = new XMLHttpRequest();
 하지만 IE 7버전 이하에서는 XHR기능이 **ActiveX 객체**(타입을 체크해보면 함수가 아닌 것이다.)로 구현되었기 때문에 별도의 처리가 필요하다.
 
 ```javascript
-if( typeof XMLHttpRequest === 'function'){
+if( typeof XMLHttpRequest === 'function'){  // 타입 체크해서 함수면 > IE 7보다 상위버전이니까 바로 new생성자 함수 써도 됨.
   xhr = new XMLHttpRequest();
 } else {  // IE 7 이전 버전
   // 
