@@ -9,7 +9,7 @@
 - MDN Web docs 참고
 https://developer.mozilla.org/ko/docs/XMLHttpRequest
 
-XMLHttpRequest는 자바스크립트에서 HTTP 요청을 생성하는 특별한 객체**(생성자 함수)**로, 현재 대부분의 브라우저에서 사용 가능하다. HTTP 요청을 만드는 과정은 다음 세 단계로 이루어진다.
+XMLHttpRequest는 자바스크립트에서 HTTP 요청을 생성하는 특별한 객체(**생성자 함수**)로, 현재 대부분의 브라우저에서 사용 가능하다. HTTP 요청을 만드는 과정은 다음 세 단계로 이루어진다.
 
 - 1. XMLHttpRequest객체(줄여서 XHR이라고도 한다.)를 설정한다.
 
@@ -17,7 +17,7 @@ XMLHttpRequest는 자바스크립트에서 HTTP 요청을 생성하는 특별한
 var xhr = new XMLHttpRequest();
 ```
 
-하지만 IE 7버전 이하에서는 XHR기능이 **ActiveX 객체(타입을 체크해보면 함수가 아닌 것이다.)**로 구현되었기 때문에 별도의 처리가 필요하다.
+하지만 IE 7버전 이하에서는 XHR기능이 **ActiveX 객체**(타입을 체크해보면 함수가 아닌 것이다.)로 구현되었기 때문에 별도의 처리가 필요하다.
 
 ```javascript
 if( typeof XMLHttpRequest === 'function'){
